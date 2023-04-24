@@ -1,0 +1,76 @@
+<%- include('header') -%>
+<% if (tickets.length) { %>
+<form method="post">
+    <div class="border rounded px-2 py-3">
+        <div class="col-12 input-group">
+            <label for="nif">NIF:</label>
+            <input name="nif" id="nif" type="text" list="nifs" required/>
+            <datalist id="nifs">
+                <% users.forEach(element=> { %>
+                    <option value="<%= element.nif %>">Pontos: <%= element.points.toFixed(0) %></option>
+                <% }) %>
+            </datalist>
+        </div>
+        <div class="col-12 input-group">
+            <label for="ticket">Tipo de Bilhete:</label>
+            <select name="ticket" id="ticket" required>
+                <option value="" disabled selected>Escolha um tipo de bilhete</option>
+                <% tickets.forEach(element=> { %>
+                    <option value="<%= element._id %>">
+                        <%= "[" + element.patrimony.name + " - " + element.event.name + "]: " + element.name + " - " + element.price + "€" %>
+                    </option>
+                <% }) %>
+            </select>
+            <label for="age">Idade do Cliente:</label>
+            <select name="age" id="age" required>
+                <option value="" disabled selected>Escolha a idade do cliente</option>
+                <option value="young">Criança</option>
+                <option value="junior">Junior</option>
+                <option value="adult">Adulto</option>
+                <option value="senior">Senior</option>
+            </select>
+            <label for="points">Pontos a usar:</label>
+            <input name="points" id="points" type="number" min="0" value="0" required/>
+        </div>
+        <div class="col-12 input-group py-2">
+            <button type="button" class="btn btn-outline-info" onclick="calculate()">Calcular</button>
+            <button type="submit" class="btn btn-outline-success ml-2">Adicionar</button>
+        </div>
+        <script>
+          let calculate = () => {
+            let nif = document.getElementById("nif").value;
+            let ticket = document.getElementById("ticket").value;
+            let age = document.getElementById("age").value;
+            let points = document.getElementById("points").value;
+            if (nif && ticket && age && points) {
+              let url = "/admin/tickets/calculate/nif/" + nif + "/ticket/" + ticket + "/age/" + age + "/points/" + points;
+              fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                  if (data.error) {
+                    alert(data.error);
+                  } else {
+                    alert("O valor a pagar é de " + data.finalPrice + "€" 
+                    + "\nPontos Utilizados: " + data.usedPoints 
+                    + "\nDesconto Aquisições: " + data.acquisitionsDiscount
+                    + "\nDesconto Anos Cliente: " + data.clientYearsDiscount
+                    + "\nDesconto Idade: " + data.ageDiscount
+                    + "\nDesconto Pontos: " + data.pointsDiscount
+                    );
+                    
+                  }
+                })
+                .catch(error => {
+                  console.error(error);
+                });
+            } else {
+              alert("Preencha todos os campos");
+            }
+          }
+        </script>
+    </div>
+</form>
+<% } else { %>
+  <div class="alert alert-info" role="alert">Não existem bilhetes.</div>
+<% } %>
+<%- include('footer') -%>

@@ -1,0 +1,110 @@
+<app-base>
+  <h2>Bilhete</h2>
+  <article class="content event_detail">
+    <div class="card bg-light text-dark mb-3 w-100">
+      <div class="card-body">
+        <div class="d-flex">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data={{ticket._id}}" width="200" height="200">
+          <div class="w-100 align-items-center justify-content-center d-flex">
+            <div class="text-center">
+              <h4>{{ticket.patrimony.name}}</h4>
+              <h5>{{ticket.event.name}}</h5>
+              <h6>{{ticket.name}}</h6>
+              <h6>{{ticket.price}}€</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div>
+        <input name="user_id" value="{{userID}}" hidden>
+        <input name="ticket_id" value="{{ticket._id}}" hidden>
+        <label for="age">Faixa Etária Cliente:</label>
+          <select name="age" id="age" [(ngModel)]="age" (change)="calculateFinalPrice()" required>
+                  <option value="" disabled selected>Escolha a sua faixa etária</option>
+                  <option value="young">Criança</option>
+                  <option value="junior">Junior</option>
+                  <option value="adult">Adulto</option>
+                  <option value="senior">Senior</option>
+          </select>
+          <label for="points">Pontos a usar: ( Pontos Disponiveis: {{userPoints.toFixed(0)}})</label>
+              <input name="points" id="points" type="number" min="0" max="{{userPoints}}" value="0" [(ngModel)]="points" (input)="calculateFinalPrice()" required/>
+          <label for="points">Descontos Aplicados:</label><br>
+          <p style="display: inline; margin-left: 20px;">Por Aquisições Realizadas: </p> {{acquisitionsDiscount.toFixed(2)}}€<br>
+          <p style="display: inline; margin-left: 20px;">Por Anos Cliente: </p> {{clientYearsDiscount.toFixed(2)}}€<br>
+          <p style="display: inline; margin-left: 20px;">Por Faixa Etária Cliente: </p> {{ageDiscount.toFixed(2)}}€<br>
+          <p style="display: inline; margin-left: 20px;">Por Pontos: </p> {{pointsDiscount.toFixed(2)}}€<br><br>
+          <label for="points">Valor Final:</label>
+              <input id="finalPrice" type="number" min="0" [(ngModel)]="finalPrice" type="number" step="0.01" disabled />
+              <br>
+      <div *ngIf="age">
+        <a class="btn btn-info" href="http://localhost:3000/stripe/user/{{userID}}/ticket/{{ticket._id}}/points/{{points}}/age/{{age}}">Comprar</a>
+      </div>
+      <div>
+        <div class="text pt-3">
+          <h2>Mais informações</h2>
+          <h4>{{ticket.event.name}}</h4>
+          <h6 style="display: inline;">Data Inicio: </h6>{{formatDate(ticket.event.startDate)}} <br>
+          <h6 style="display: inline;">Data Fim: </h6>{{formatDate(ticket.event.endDate)}}
+          <h6>Descrição:</h6>
+            <div style="text-align: justify;">
+              <ng-container *ngFor="let paragraph of ticket.event.description.split('\r\n')">
+                <p>{{ paragraph }}</p>
+              </ng-container>
+            </div>
+          <br>
+          <h4>{{ticket.patrimony.name}}</h4>
+          <h6 style="display: inline;">Descrição: </h6> {{ticket.patrimony.description}}<br>
+          <h6 style="display: inline;">Categoria: </h6> {{ticket.patrimony.category}}<br>
+          <h6 style="display: inline;">Coordenadas GPS: </h6> <a target="_blank" href="https://www.google.com/maps/@{{ticket.patrimony.latitude}},{{ticket.patrimony.longitude}},17z">{{ticket.patrimony.latitude}} {{ticket.patrimony.longitude}}</a><br>
+        </div>
+      </div>
+      <div class="col-md-6 mt-3">
+        <h4 class="lead">Fotos {{ ticket.patrimony.name }}</h4>
+    </div>
+    <div id="demo" class="carousel slide text-center row justify-content-center align-self-center" data-ride="carousel"
+         data-interval="2000" data-pause="hover">
+
+         <ul class="carousel-indicators">
+          <ng-container *ngFor="let file of ticket.patrimony.files; let i = index">
+              <li data-target="#demo" [attr.data-slide-to]="i" [ngClass]="{ 'active': i === 0 }" *ngIf="file.mimetype.startsWith('image')"></li>
+          </ng-container>
+      </ul>
+
+      <div class="carousel-inner">
+          <ng-container *ngFor="let file of ticket.patrimony.files; let i = index">
+              <div class="carousel-item" [ngClass]="{ 'active': i === 0 }" *ngIf="file.mimetype.startsWith('image')">
+                  <img class="img-fluid img-thumbnail rounded" [src]="'http://localhost:3000/' + file.path" alt="">
+              </div>
+          </ng-container>
+      </div>
+
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+
+    <div class="col-md-6 mt-3">
+        <h4 class="lead">Vídeos {{ticket.patrimony.name}}</h4>
+    </div>
+    <div class="row justify-content-center align-self-center pb-3">
+      <ng-container *ngFor="let file of ticket.patrimony.files">
+          <ng-container *ngIf="file.mimetype.startsWith('video')">
+              <div class="row">
+                  <div class="col">
+                      <video class="img-fluid img-thumbnail rounded" controls>
+                          <source [src]="'http://localhost:3000/' + file.path" [type]="file.mimetype">
+                      </video>
+                  </div>
+              </div>
+          </ng-container>
+      </ng-container>
+  </div>
+
+    </div>
+  </article>
+</app-base>

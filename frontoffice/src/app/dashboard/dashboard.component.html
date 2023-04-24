@@ -1,0 +1,60 @@
+<app-base>
+  <div class="row text-center justify-content-center">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 d-flex justify-content-center">
+      <div class="card bg-light text-dark mb-3 w-100">
+        <div class="card-header">Bilhetes Adquiridos</div>
+        <div class="card-body">
+          <h1>{{acquiredTickets}}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 d-flex justify-content-center">
+      <div class="card bg-light text-dark mb-3 w-100">
+        <div class="card-header">Eventos Disponiveis</div>
+        <div class="card-body">
+          <h1>{{availableEvents}}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 d-flex justify-content-center">
+      <div class="card bg-light text-dark mb-3 w-100">
+        <div class="card-header">Eventos para Hoje</div>
+        <div class="card-body">
+          <h1>{{todayEvents}}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 d-flex justify-content-center">
+      <div class="card bg-light text-dark mb-3 w-100">
+        <div class="card-header">Eventos no Futuro</div>
+        <div class="card-body">
+          <h1>{{futureEvents}}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <ng-container *ngIf="ticketList.length > 0; else noTickets">
+    <table class="table">
+      <thead>
+        <tr>
+          <td scope="col"></td>
+          <th scope="col">Evento</th>
+          <th scope="col">Bilhete</th>
+          <th scope="col" style="text-align: left;">Preço</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let element of ticketList">
+          <td><i class="fas fa-ticket-alt"></i></td>
+          <td style="vertical-align: middle;">{{ element.event.name }}</td>
+          <td style="vertical-align: middle;">{{ element.ticket.name }}</td>
+          <td style="vertical-align: middle;">{{ element.price.toFixed(2) }}€</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+  <ng-template #noTickets>
+    <div class="alert alert-info mt-3" role="alert">Não existem bilhetes comprados.</div>
+  </ng-template>
+</app-base>

@@ -1,0 +1,40 @@
+<%- include('header') -%>
+  <% if (userTickets.length) { %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Bilhete</th>
+          <th scope="col">Comprados</th>
+          <th scope="col" style="text-align: center;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% userTickets.forEach(element=> { %>
+          <tr>
+            <td style="vertical-align: middle;"><i class="fas fa-ticket-alt"></i></td>
+            <td style="vertical-align: middle;">[<%= element.patrimony.name %> - <%= element.event.name %>]: <%=
+                    element.ticket.name %>
+            </td>
+            <td style="vertical-align: middle;">
+              <ul style="list-style-type: none;">
+                <li>
+                  <%= element.count %>
+                </li>
+              </ul>
+            </td>
+            <td style="vertical-align: middle;">
+              <ul style="list-style-type: none;">
+                <li>
+                  <%= element.totalValue.toFixed(2) %>€
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <% }) %>
+      </tbody>
+    </table>
+    <% } else { %>
+      <div class="alert alert-info" role="alert">Não existem bilhetes comprados.</div>
+      <% } %>
+        <%- include('footer') -%>

@@ -1,0 +1,40 @@
+<header class="site-header">
+    <nav
+      class="navbar navbar-expand-md navbar-fixed-left navbar-dark bg-steel fixed-top"
+    >
+      <div class="container">
+        <a class="navbar-brand mr-4 lead">Cliente</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarToggle"
+          aria-controls="navbarToggle"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggle">
+          <div class="navbar-nav mr-auto">
+            <a class="nav-item nav-link" routerLink="/dashboard"
+              ><i class="fas fa-home"></i> Dashboard</a>
+            <a class="nav-item nav-link" routerLink="/tickets"
+              ><i class="fas fa-ticket-alt"></i> Bilhetes</a>
+          </div>
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" routerLink="/profile"><i class="fas fa-user"></i>
+              {{name}}
+            </a>
+            <a class="nav-item nav-link btn" (click)="logout()"><i class="fas fa-sign-out-alt"></i>
+                Terminar Sessão
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main role="main" class="container" style="margin-top: 5rem;">
+    <ng-content></ng-content>
+  </main>
+

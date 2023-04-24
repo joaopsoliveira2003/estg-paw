@@ -1,0 +1,258 @@
+<%- include('header') -%>
+  <table class="table">
+    <thead>
+      <tr>
+        <th colspan="3" scope="col" style="text-align: center;">Estatísticas</th>
+      </tr>
+    </thead>
+  </table>
+  <div class="row text-center justify-content-center">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-center">
+        <div class="card w-100 mb-3">
+          <canvas id="top3Patrimonies"></canvas>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-center">
+        <div class="card w-100 mb-3">
+          <canvas id="top3Events"></canvas>
+        </div>
+    </div>
+</div>
+<div class="row text-center justify-content-center">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-center">
+        <div class="card w-100 mb-3">
+          <canvas id="top3Users"></canvas>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-center">
+        <div class="card w-100 mb-3">
+          <canvas id="top3Tickets"></canvas>
+        </div>
+    </div>
+</div>
+<div class="row text-center justify-content-center">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-center">
+        <div class="card w-100 mb-3">
+          <canvas id="bottom3Tickets"></canvas>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-center">
+        <div class="card w-100 mb-3">
+          <canvas id="averageMoney"></canvas>
+        </div>
+    </div>
+</div>
+
+  <script>
+    window.onload = () => {
+      const top3Patrimonies = {
+        labels: [<% top3Patrimonies.forEach((element, index) => { %>'<%= element.name %>'<% if (index !== top3Patrimonies.length - 1) { %>,<% } %><% }); %>],
+        values: [<% top3Patrimonies.forEach((element, index) => { %><%= element.events_count %><% if (index !== top3Patrimonies.length - 1) { %>,<% } %><% }); %>]
+      };
+
+      const top3Events = {
+        labels: [<% top3Events.forEach((element, index) => { %>'<%= element.name %>'<% if (index !== top3Events.length - 1) { %>,<% } %><% }); %>],
+        values: [<% top3Events.forEach((element, index) => { %><%= element.tickets_count %><% if (index !== top3Events.length - 1) { %>,<% } %><% }); %>]
+      };
+
+      const top3Users = {
+        labels: [<% top3Users.forEach((element, index) => { %>'<%= element.user.name %>'<% if (index !== top3Users.length - 1) { %>,<% } %><% }); %>],
+        values: [<% top3Users.forEach((element, index) => { %><%= element.count %><% if (index !== top3Users.length - 1) { %>,<% } %><% }); %>]
+      };
+
+      const top3Tickets = {
+        labels: [<% top3Tickets.forEach((element, index) => { %>'<%= element.event.name %>'<% if (index !== top3Tickets.length - 1) { %>,<% } %><% }); %>],
+        values: [<% top3Tickets.forEach((element, index) => { %><%= element.count %><% if (index !== top3Tickets.length - 1) { %>,<% } %><% }); %>]
+      };
+
+      const bottom3Tickets = {
+        labels: [<% bottom3Tickets.forEach((element, index) => { %>'<%= element.event.name %>'<% if (index !== bottom3Tickets.length - 1) { %>,<% } %><% }); %>],
+        values: [<% bottom3Tickets.forEach((element, index) => { %><%= element.count %><% if (index !== bottom3Tickets.length - 1) { %>,<% } %><% }); %>]
+      };
+      const averageMoney = {
+        labels: [<% averageMoney.forEach((element, index) => { %>'Valor Médio Consumo'<% if (index !== averageMoney.length - 1) { %>,<% } %><% }); %>],
+        values: [<% averageMoney.forEach((element, index) => { %><%= element.average.toFixed(2) %><% if (index !== averageMoney.length - 1) { %>,<% } %><% }); %>]
+      };
+      
+      window.top3Patrimonies = new Chart(document.getElementById('top3Patrimonies').getContext('2d'), {
+        type: 'bar',
+        data: {
+          datasets: [{
+            data: top3Patrimonies.values,
+            backgroundColor: [
+              'rgba(255, 0, 0, 0.2)',
+              'rgba(0, 255, 68, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 0, 0, 0.5)',
+              'rgba(0, 255, 68, 1)'
+            ],
+            borderWidth: 1,
+            label: 'Top 3 Patrimónios'
+          }],
+          labels: top3Patrimonies.labels,
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+                callback: (value) => { if (value % 1 === 0) { return value; } }
+              }
+            }]
+          }
+        }
+      });
+      
+      window.top3Events = new Chart(document.getElementById('top3Events').getContext('2d'), {
+        type: 'bar',
+        data: {
+          datasets: [{
+            data: top3Events.values,
+            backgroundColor: [
+              'rgba(255, 0, 0, 0.2)',
+              'rgba(0, 255, 68, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 0, 0, 0.5)',
+              'rgba(0, 255, 68, 1)'
+            ],
+            borderWidth: 1,
+            label: 'Top 3 Eventos'
+          }],
+          labels: top3Events.labels,
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+                callback: (value) => { if (value % 1 === 0) { return value; } }
+              }
+            }]
+          }
+        }
+      });
+    
+      window.top3Users = new Chart(document.getElementById('top3Users').getContext('2d'), {
+        type: 'bar',
+        data: {
+          datasets: [{
+            data: top3Users.values,
+            backgroundColor: [
+              'rgba(255, 0, 0, 0.2)',
+              'rgba(0, 255, 68, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 0, 0, 0.5)',
+              'rgba(0, 255, 68, 1)'
+            ],
+            borderWidth: 1,
+            label: 'Top 3 Utilizadores'
+          }],
+          labels: top3Users.labels,
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+                callback: (value) => { if (value % 1 === 0) { return value; } }
+              }
+            }]
+          }
+        }
+      });
+    
+      window.top3Tickets = new Chart(document.getElementById('top3Tickets').getContext('2d'), {
+        type: 'bar',
+        data: {
+          datasets: [{
+            data: top3Tickets.values,
+            backgroundColor: [
+              'rgba(255, 0, 0, 0.2)',
+              'rgba(0, 255, 68, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 0, 0, 0.5)',
+              'rgba(0, 255, 68, 1)'
+            ],
+            borderWidth: 1,
+            label: 'Top 3 Bilhetes Mais Adquiridos'
+          }],
+          labels: top3Tickets.labels,
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+                callback: (value) => { if (value % 1 === 0) { return value; } }
+              }
+            }]
+          }
+        }
+      });
+
+      window.bottom3Tickets = new Chart(document.getElementById('bottom3Tickets').getContext('2d'), {
+        type: 'bar',
+        data: {
+          datasets: [{
+            data: bottom3Tickets.values,
+            backgroundColor: [
+              'rgba(255, 0, 0, 0.2)',
+              'rgba(0, 255, 68, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 0, 0, 0.5)',
+              'rgba(0, 255, 68, 1)'
+            ],
+            borderWidth: 1,
+            label: 'Top 3 Bilhetes Menos Adquiridos'
+          }],
+          labels: bottom3Tickets.labels,
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+                callback: (value) => { if (value % 1 === 0) { return value; } }
+              }
+            }]
+          }
+        }
+      });
+
+      window.averageMoney = new Chart(document.getElementById('averageMoney').getContext('2d'), {
+        type: 'bar',
+        data: {
+          datasets: [{
+            data: averageMoney.values,
+            backgroundColor: [
+              'rgba(255, 0, 0, 0.2)',
+              'rgba(0, 255, 68, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 0, 0, 0.5)',
+              'rgba(0, 255, 68, 1)'
+            ],
+            borderWidth: 1,
+            label: 'Valor Médio Consumo'
+          }],
+          labels: averageMoney.labels,
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+                callback: (value) => { if (value % 1 === 0) { return value; } }
+              }
+            }]
+          }
+        }
+      });
+    }
+  </script>
+  <%- include('footer') -%>

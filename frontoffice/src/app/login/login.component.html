@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+        <div class="col-md-8 col-lg-6">
+            <div class="login d-flex align-items-center py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 col-lg-8 mx-auto">
+                            <h5 class="mb-4">
+                                <a routerLink="/dashboard"><i class="fas fa-arrow-circle-left"></i> Voltar</a>
+                            </h5>
+                            <h3 class="login-heading mb-4">Bem-vindo de volta!</h3>
+                            <form method="post">
+                                <div class="form-label-group">
+                                    <input name="username" type="number" id="nif" class="form-control" placeholder="NIF" [(ngModel)]="nif" required/>
+                                    <label for="nif">NIF</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <input name="password" type="password" id="password" class="form-control" placeholder="Palavra-passe" [(ngModel)]="password" required/>
+                                    <label for="password">Palavra-passe</label>
+                                </div>
+                                <div class="text-center text-danger pb-3">
+                                    <a>
+                                        {{error}}
+                                    </a>
+                                </div>
+                                <button type="button" (click)="login()" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2 text-white">
+                                    Iniciar Sessão
+                                </button>
+                                <div class="text-center pt-2">
+                                    <a routerLink="/register">Não tem conta? Crie uma aqui!</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

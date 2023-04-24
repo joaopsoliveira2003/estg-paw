@@ -1,0 +1,132 @@
+<app-base>
+  <div class="container">
+    <div class="main-body">
+      <div class="row">
+        <div class="modal fade" id="edit" data-backdrop="static" data-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header bg-steel text-light">
+                <h5 class="lead text-light" id="staticBackdropLabel">Gerir
+                  Perfil</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form method="post">
+                <div class="modal-body">
+                  <label for="name">Nome:</label>
+                  <input name="name" id="name" type="text" [(ngModel)]="user.name" required>
+                  <label for="email">Email:</label>
+                  <input name="email" id="email" type="text" [(ngModel)]="user.email" required>
+                </div>
+                <div class="modal-footer">
+                  <div class="mr-auto">
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal" routerLink="/password">Editar Palavra-passe
+                    </button>
+                  </div>
+                  <button (click)="updateProfile()" data-dismiss="modal" style="margin-right: 5px;" type="button" class="btn btn-outline-success">Guardar
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <h4 class="lead">Informações</h4>
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Nome:</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{user.name}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Email:</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{user.email}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Nif:</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{user.nif}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Pontos:</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{user.points.toFixed(0)}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Dinheiro Gasto:</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{user.totalMoney.toFixed(2)}}€
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#edit">Editar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="tickets.length; else noTickets">
+    <div class="col-md-12 pt-2">
+      <h4 class="lead">Bilhetes</h4>
+    </div>
+    <div class="accordion mb-3 mx-3" id="accordion">
+      <div class="card" *ngFor="let element of tickets">
+        <div class="card-header" id="heading{{element._id}}">
+          <h2 class="mb-0">
+            <button class="btn btn-block text-left" type="button" data-toggle="collapse"
+                    [attr.data-target]="'#collapse' + element._id" aria-expanded="true"
+                    [attr.aria-controls]="'collapse' + element._id">
+              <i class="fas fa-building"></i>
+              {{element.event.name}} - {{element.patrimony.name}}
+            </button>
+          </h2>
+        </div>
+        <div [id]="'collapse' + element._id" class="collapse" [attr.aria-labelledby]="'heading' + element._id"
+             data-parent="#accordion">
+          <div class="card-body">
+            <p><i class="fas fa-hashtag"></i> Número: {{element._id}}</p>
+            <p><i class="fas fa-euro-sign"></i> Preço: {{element.price.toFixed(2)}}€</p>
+            <p><i class="fas fa-ticket-alt"></i> Tipo de Bilhete: {{element.ticket.name}}</p>
+            <p><i class="fas fa-star"></i> Pontos Usados: {{element.points}}</p>
+            <p><i class="fas fa-percent"></i> Desconto: {{element.discount.toFixed(2)}}€</p>
+            <p><i class="fas fa-calendar-alt"></i> Data da Compra: {{element.date | date:'medium'}}</p>
+            <img [src]="'https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=' + element._id">
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #noTickets>
+    <div class="alert alert-info mt-3" role="alert">Não existem bilhetes comprados.</div>
+  </ng-template>
+
+
+</app-base>

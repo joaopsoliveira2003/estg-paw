@@ -1,0 +1,42 @@
+<div class="modal fade" id="manage" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-steel text-light">
+        <h5 class="lead text-light" id="staticBackdropLabel">
+          Gerir Utilizadores
+        </h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="post" action="">
+        <div class="modal-body">
+          <label for="username">Nome do utilizador:</label>
+          <input id="username" type="text" class="form-control" name="username" required/>
+          <label for="group">Grupo:</label>
+          <select id="group" name="group" required>
+            <option value="user">Utilizador</option>
+            <option value="admin">Técnico</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <a href="" class="btn btn-outline-warning mr-auto">Registar Cliente</a>
+          <div class="d-flex justify-content-center">
+            <button style="margin-right: 5px" type="submit" class="btn btn-outline-success">
+              Enviar
+            </button>
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<li class="list-group-item list-group-item-light">
+  <a href="#" data-toggle="modal" data-target="#manage" class="text-reset"><i class="fas fa-cog"></i>
+    Administração</a>
+</li>

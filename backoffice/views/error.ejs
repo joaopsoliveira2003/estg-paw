@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ocorreu um erro durante o processamento da sua solicitação</title>
+    <link rel="stylesheet" href="/css/error.css">
+</head>
+<body>
+<div class="error-container">
+    <img src="/img/error.png" alt="Erro">
+    <h1>Oops! Algo deu errado.</h1>
+    <p>Lamentamos, mas ocorreu um erro durante o processamento da sua solicitação. </p>
+    <h2><%= error.status %>  <%= message %></h2>
+    <p>Por favor, tente novamente mais tarde.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<%- include('header') -%>
+  <div class="row text-center justify-content-center">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 d-flex justify-content-center">
+      <div class="card bg-light text-dark mb-3 w-100">
+        <div class="card-header">Patrimónios</div>
+        <div class="card-body">
+          <h1>
+            <%= numberOfPatrimonies %>
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 d-flex justify-content-center">
+      <div class="card bg-light text-dark mb-3 w-100">
+        <div class="card-header">Eventos</div>
+        <div class="card-body">
+          <h1>
+            <%= numberOfEvents %>
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 d-flex justify-content-center">
+      <div class="card bg-light text-dark mb-3 w-100">
+        <div class="card-header">Utilizadores</div>
+        <div class="card-body">
+          <h1>
+            <%= numberOfUsers %>
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 d-flex justify-content-center">
+      <div class="card bg-light text-dark mb-3 w-100">
+        <div class="card-header">Bilhetes</div>
+        <div class="card-body">
+          <h1>
+            <%= numberOfTickets %>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <% if (lastTickets.length) { %>
+    <table class="table">
+      <thead>
+        <tr>
+          <td scope="col"></td>
+          <th scope="col">Nome</th>
+          <th scope="col">Evento</th>
+          <th scope="col">Bilhete</th>
+          <th scope="col" style="text-align: left;">Preço</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% lastTickets.forEach((element)=> { %>
+          <tr>
+            <td><i class="fas fa-ticket-alt"></td>
+            <td style="vertical-align: middle; ">
+              <%= element.user.name %>
+            </td>
+            <td style="vertical-align: middle;">
+              <%= element.event.name %>
+            </td>
+            <td style="vertical-align: middle;">
+              <%= element.ticket.name %>
+            </td>
+            <td style="vertical-align: middle;">
+              <%= element.price.toFixed(2) %>€
+            </td>
+            <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <div class="alert alert-info mt-3" role="alert">Não existem bilhetes vendidos.</div>
+  <% } %>
+<%- include('footer') -%>

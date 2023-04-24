@@ -1,0 +1,171 @@
+<%- include('header') -%>
+<form method="post">
+    <table class="table">
+        <thead>
+        <tr>
+            <th colspan="3" style="text-align: center;">Percentagem Descontos Aplicados</th>    
+        </tr>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Categoria</th>
+            <th scope="col" style="text-align: center">Percentagem</th>
+        </tr>
+         
+        </thead>
+        <tbody>
+        <tr>
+            <td style="vertical-align: middle"><i class=""></i></td>
+            <td style="vertical-align: middle;; text-align: center" > Número Aquisições Realizadas</td>
+            <td style="vertical-align: middle">
+                <ul style="list-style-type: none; text-align: center">
+                    <li>
+                        <input
+                                style="text-align: center"
+                                type="number"
+                                step="any"
+                                id="percentagem-desconto"
+                                placeholder="Desconto Aquisições"
+                                name="acquisitions"
+                                value="<%= fidelity.acquisitions %>"
+                                min="0"
+                                required
+                        />
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td style="vertical-align: middle"><i class=""></i></td>
+            <td style="vertical-align: middle; text-align: center"> Número Anos Cliente</td>
+            <td style="vertical-align: middle">
+                <ul style="list-style-type: none; text-align: center">
+                    <li>
+                        <input
+                                style="text-align: center"
+                                type="number"
+                                step="any"
+                                id="anos-cliente"
+                                name="years"
+                                min="0"
+                                value="<%= fidelity.years %>"
+                                placeholder="Desconto Anos de Cliente"
+                                required
+                        />
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td style="vertical-align: middle"><i class=""></i></td>
+            <td style="vertical-align: middle; text-align: center"> Pontos</td>
+            <td style="vertical-align: middle">
+                <ul style="list-style-type: none; text-align: center">
+                    <li>
+                        <input
+                                style="text-align: center"
+                                type="number"
+                                step="any"
+                                id="points"
+                                name="points"
+                                value="<%= fidelity.points %>"
+                                min="0"
+                                placeholder="Desconto Pontos"
+                                required
+                        />
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td style="vertical-align: middle"><i class=""></i></td>
+            <td style="vertical-align: middle; text-align: center"> Idade Infantil </td>
+            <td style="vertical-align: middle">
+                <ul style="list-style-type: none; text-align: center">
+                    <li>
+                        <input
+                                style="text-align: center"
+                                type="number"
+                                step="any"
+                                id="young"
+                                name="young"
+                                value="<%= fidelity.age.young %>"
+                                min="0"
+                                placeholder="Desconto Infantil"
+                                required
+                        />
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td style="vertical-align: middle"><i class=""></i></td>
+            <td style="vertical-align: middle; text-align: center"> Idade Juvenil </td>
+            <td style="vertical-align: middle">
+                <ul style="list-style-type: none; text-align: center">
+                    <li>
+                        <input
+                                style="text-align: center"
+                                type="number"
+                                step="any"
+                                id="junior"
+                                name="junior"
+                                value="<%= fidelity.age.junior %>"
+                                min="0"
+                                placeholder="Desconto Juvenil"
+                                required
+                        />
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td style="vertical-align: middle"><i class=""></i></td>
+            <td style="vertical-align: middle; text-align: center"> Idado Adulto</td>
+            <td style="vertical-align: middle">
+                <ul style="list-style-type: none; text-align: center">
+                    <li>
+                        <input
+                                style="text-align: center"
+                                type="number"
+                                step="any"
+                                id="adult"
+                                name="adult"
+                                value="<%= fidelity.age.adult %>"
+                                min="0"
+                                placeholder="Desconto Adulto"
+                                required
+                        />
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td style="vertical-align: middle"><i class=""></i></td>
+            <td style="vertical-align: middle; text-align: center"> Idade Senior</td>
+            <td style="vertical-align: middle">
+                <ul style="list-style-type: none; text-align: center">
+                    <li>
+                        <input
+                                style="text-align: center"
+                                type="number"
+                                step="any"
+                                id="senior"
+                                name="senior"
+                                value="<%= fidelity.age.senior %>"
+                                min="0"
+                                placeholder="Desconto Senior"
+                                required
+                        />
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        
+        </tbody>
+    </table>
+    <div class="col-12 input-group px-3 d-flex justify-content-center">
+        <button type="submit" class="btn btn-outline-success">Guardar</button>
+    </div>
+    
+</form>
+<%- include('footer') -%>

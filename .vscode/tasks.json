@@ -1,0 +1,49 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run MongoDB on Docker",
+      "type": "shell",
+      "command": "cd backoffice; docker-compose up",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "develop",
+      },
+      "runOptions": { "runOn": "default" }
+    },
+    {
+      "label": "Run Express",
+      "type": "shell",
+      "command": "cd backoffice; nodemon",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "develop",
+      },
+      "runOptions": { "runOn": "default" }
+    },
+    {
+      "label": "Run Angular",
+      "type": "shell",
+      "command": "cd frontoffice; ng serve --host 0.0.0.0",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "develop",
+      },
+      "runOptions": { "runOn": "default" }
+    },
+    {
+      "label": "Run Stripe",
+      "type": "shell",
+      "command": "stripe listen --forward-to localhost:3000/stripe/webhook",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "develop",
+      },
+      "runOptions": { "runOn": "default" }
+    }
+  ]
+}

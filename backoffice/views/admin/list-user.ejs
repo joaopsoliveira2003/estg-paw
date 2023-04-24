@@ -1,0 +1,38 @@
+<%- include('header') -%>
+<form method="post">
+    <div class="border rounded px-2 py-3">
+        <div class="col-12 input-group">
+            <label for="nif">NIF:</label>
+            <input name="nif" id="nif" type="number" required/>
+        </div>
+        <div class="col-12 input-group py-2">
+            <button type="submit" class="btn btn-outline-success">Pesquisar</button>
+        </div>
+    </div>
+</form>
+<% if (users.length) { %>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Utilizador</th>
+            <th scope="col">NIF</th>
+            <th scope="col" style="text-align: center;">Gerir</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% users.forEach((element) => { %>
+            <tr>
+                <td style="vertical-align: middle;"><%= element.name %></td>
+                <td style="vertical-align: middle;"><%= element.nif %></td>
+                <td style="vertical-align: middle; text-align: center;">
+                    <li class="text-white"><a href="/admin/profile/<%= element.nif %>"><i class="fas fa-user"></i></a>
+                    </li>
+                </td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+<% } else { %>
+    <div class="alert alert-info mt-3" role="alert">Não existe o utilizador especificado.</div>
+<% } %>
+<%- include('footer') -%>

@@ -1,0 +1,121 @@
+<%- include('header') -%>
+<% if (tickets.length) { %>
+    <table class="table table-striped table-bordered table-responsive-xl table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Tipo</th>
+            <th style="text-align: center;" scope="col" >Preço</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% tickets.forEach(element=> { %>
+            <tr data-toggle="modal" data-target="#modal<%= element._id %>" style="cursor: pointer">
+                <th scope="row">
+                    <%= element.name %>
+                </th>
+                <td>
+                    <li style="list-style-type: none; text-align: center;"><%= element.price.toFixed(2) %>€</li>
+                </td>
+            </tr>
+            <div class="modal fade" id="modal<%= element._id %>" data-backdrop="static" data-keyboard="false"
+                 tabindex="-1"
+                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-steel text-light">
+                            <h5 class="lead text-light" id="staticBackdropLabel">
+                                <%= element.name %>
+                            </h5>
+                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <base href="/admin/events/<%= element.event_id %>/tickets/"/>
+                        <form method="post" action="update">
+                            <input type="hidden" name="id" value="<%= element._id %>"/>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-12 input-group">
+                                        <label for="type">Nome:</label>
+                                        <input name="name" id="type" type="text" value="<%= element.name %>" required/>
+                                    </div>
+                                    <div class="col-12 input-group">
+                                        <label for="price">Preço:</label>
+                                        <input name="price" id="price" type="number" step="any"
+                                               value="<%= element.price %>" required/>
+                                    </div>
+                                    <div class="col-12 input-group">
+                                        <label for="visible">Visível:</label>
+                                        <input name="visible" id="visible" type="text" value="<%= element.visible %>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="d-flex justify-content-center">
+                                    <script>
+                                      deleteButton = (form) => {
+                                        form.action = "delete";
+                                        form.submit();
+                                      };
+                                    </script>
+                                    <button type="submit" class="btn btn-danger mr-2"
+                                            onclick="deleteButton(this.parentElement.parentElement.parentElement.children[2])">
+                                        Apagar
+                                    </button>
+                                    <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">
+                                        Cancelar
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+        </tbody>
+    </table>
+<% } else { %>
+    <div class="alert alert-info" role="alert">Não existem bilhetes.</div>
+<% } %>
+<a class="btn btn-success mb-3" href="#" data-toggle="modal" data-target="#add_event">Adicionar Bilhete</a>
+<div class="modal fade" id="add_event" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-steel text-light">
+                <h5 class="lead text-light" id="staticBackdropLabel">
+                    Adicionar Bilhete
+                </h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12 input-group">
+                            <label for="type">Nome:</label>
+                            <input name="name" id="type" type="text" required/>
+                        </div>
+                        <div class="col-12 input-group">
+                            <label for="price">Preço:</label>
+                            <input name="price" id="price" type="number" step="any" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-outline-success mr-2">
+                            Adicionar
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include('footer') -%>

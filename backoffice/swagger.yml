@@ -1,0 +1,281 @@
+swagger: "2.0"
+info:
+  title: API Documentation
+  version: 1.0.0
+host: 'localhost:3000'
+basePath: /api
+schemes:
+  - https
+paths:
+  /login:
+    post:
+      tags:
+        - Authentication
+      summary: User login
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+      responses:
+        302:
+          description: User logged in successfully
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+        500:
+          description: User login failed
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+      security:
+        - Bearer: []
+  /register:
+    post:
+      tags:
+        - User
+      summary: Create a new user
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              email:
+                type: string
+              nif:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: User registration successful
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+        500:
+          description: User registration failed
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+      security:
+        - Bearer: []
+  /password:
+    post:
+      tags:
+        - User
+      summary: Change user password
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              oldPassword:
+                type: string
+              newPassword:
+                type: string
+      responses:
+        200:
+          description: Password changed successfully
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+        500:
+          description: Password change failed
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+      security:
+        - Bearer: []
+  /dashboard:
+    get:
+      tags:
+        - User
+      summary: Get user dashboard information
+      produces:
+        - application/json
+      responses:
+        200:
+          description: User dashboard information
+          schema:
+            type: object
+            properties:
+              acquiredTickets:
+                type: number
+              availableEvents:
+                type: number
+              todayEvents:
+                type: number
+              futureEvents:
+                type: number
+              ticketList:
+                type: array
+        500:
+          description: Failed to retrieve user dashboard information
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+      security:
+        - Bearer: []
+  /tickets:
+    get:
+      tags:
+        - Ticket
+      summary: Get all available tickets
+      produces:
+        - application/json
+      responses:
+        200:
+          description: List of available tickets
+          schema:
+            type: object
+            properties:
+              tickets:
+                type: array
+        500:
+          description: Failed to retrieve tickets
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+      security:
+        - Bearer: []
+  /tickets/{id}:
+    get:
+      tags:
+        - Ticket
+      summary: Get ticket details
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Ticket details
+          schema:
+            type: object
+            properties:
+              ticket:
+                type: object
+              points:
+                type: number
+              fidelity:
+                type: object
+              years:
+                type: number
+              acquisitions:
+                type: number
+        500:
+          description: Failed to retrieve ticket details
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+      security:
+        - Bearer: []
+  /profile:
+    get:
+      tags:
+        - User
+      summary: Get user profile
+      produces:
+        - application/json
+      responses:
+        200:
+          description: User profile information
+          schema:
+            type: object
+            properties:
+              user:
+                type: object
+              tickets:
+                type: array
+              totalMoney:
+                type: number
+        500:
+          description: Failed to retrieve user profile
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+      security:
+        - Bearer: []
+    put:
+      tags:
+        - User
+      summary: Update user profile
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              email:
+                type: string
+      responses:
+        200:
+          description: User profile updated successfully
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+        500:
+          description: Failed to update user profile
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+      security:
+        - Bearer: []

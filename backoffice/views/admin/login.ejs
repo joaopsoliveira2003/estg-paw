@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Login</title>
+    <link href="/img/favicon.png" rel="icon" type="image/png"/>
+    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon" type="image/png"/>
+    <link href="/fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/login.css" rel="stylesheet" type="text/css"/>
+    <style>
+      .bg-image {
+        background-image: url("/img/coimbra.png");
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+        <div class="col-md-8 col-lg-6">
+            <div class="login d-flex align-items-center py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 col-lg-8 mx-auto">
+                            <h5 class="mb-4">
+                                <a href="/"><i class="fas fa-arrow-circle-left"></i> Voltar</a>
+                            </h5>
+                            <h3 class="login-heading mb-4">Bem-vindo de volta!</h3>
+                            <form method="post">
+                                <div class="form-label-group">
+                                    <input name="username" type="number" id="nif" class="form-control" placeholder="NIF"
+                                           required/>
+                                    <label for="nif">NIF</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <input name="password" type="password" id="password" class="form-control"
+                                           placeholder="Palavra-passe" required/>
+                                    <label for="password">Palavra-passe</label>
+                                </div>
+                                <div class="text-center text-danger pb-3">
+                                    <a>
+                                        <%= error %>
+                                    </a>
+                                </div>
+                                <button type="submit"
+                                        class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2 text-white">
+                                    Iniciar Sessão
+                                </button>
+                                <div class="text-center pt-2">
+                                    <a href="/admin/register">Não tem conta? Crie uma aqui!</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/jquery/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

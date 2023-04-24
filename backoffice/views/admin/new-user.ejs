@@ -1,0 +1,32 @@
+<%- include('header') -%>
+<form method="post">
+    <div class="border rounded px-2 py-3">
+        <div class="col-12 input-group">
+            <label for="name">Nome:</label>
+            <input name="name" id="name" type="text" required/>
+        </div>
+        <div class="col-12 input-group">
+            <label for="email">Email:</label>
+            <input name="email" id="email" type="text" required/>
+        </div>
+        <div class="col-12 input-group">
+            <label for="nif">NIF:</label>
+            <input name="nif" id="nif" type="text" required/>
+        </div>
+        <div class="col-12 input-group">
+            <label for="password">Password:</label>
+            <input name="password" id="password" type="password" required/>
+        </div>
+        <div class="col-12 input-group">
+            <label for="admin">Administrador:</label>
+            <select name="admin" id="admin">
+                <option value="true">Sim</option>
+                <option value="false" selected>Não</option>
+            </select>
+        </div>
+        <div class="col-12 input-group py-2">
+            <button type="submit" class="btn btn-outline-success"> Adicionar</button>
+        </div>
+    </div>
+</form>
+<%- include('footer') -%>

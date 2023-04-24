@@ -1,0 +1,97 @@
+<%- include('header') -%>
+<div class="container">
+    <div class="main-body">
+        <div class="">
+            <div class="col-md-3 mb-3">
+                <div class="modal fade" id="edit" data-backdrop="static"
+                     data-keyboard="false" tabindex="-1"
+                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header bg-steel text-light">
+                                <h5 class="lead text-light" id="staticBackdropLabel">Gerir
+                                    Perfil</h5>
+                                <button type="button" class="close text-white"
+                                        data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <label for="name">Nome:</label>
+                                    <input name="name" id="name" type="text" value="<%=
+                                    user.name %>" required>
+                                    <label for="password">Password:</label>
+                                    <input name="password" id="password" type="text" value="<%=
+                                    user.password %>" required>
+                                    <label for="nif">NIF:</label>
+                                    <input name="nif" id="nif" type="text" value="<%= user.nif
+                                    %>" required>
+                                    <label for="admin">Admin:</label>
+                                    <input name="admin" id="admin" type="text" value="<%=
+                                    user.admin %>" required>
+                                </div>
+                                <div class="modal-footer">
+                                    <button style="margin-right: 5px;" type="submit" class="btn
+                      btn-outline-success">Guardar
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary"
+                                            data-dismiss="modal">Cancelar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h4 class="lead">Informações</h4>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Nome:</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <%= user.name %>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Password:</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <%= user.password %>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">NIF:</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <%= user.nif %>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Admin:</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <%= user.admin %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-outline-primary"
+                                data-toggle="modal" data-target="#edit">Editar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('footer') -%>
